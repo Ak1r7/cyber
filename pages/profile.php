@@ -10,9 +10,15 @@ if (!is_logged_in()) {
 require_once '../includes/header.php';
 ?>
 
-<?php if (isset($_GET['order_success'])): ?>
+<?php if (isset($_GET['payment_success'])): ?>
     <div class="alert success">
-        <p>Your order has been placed successfully!</p>
+        <p>Payment successful! Your order has been placed.</p>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['payment_error'])): ?>
+    <div class="alert error">
+        <p>Payment failed. Please try again.</p>
     </div>
 <?php endif; ?>
 

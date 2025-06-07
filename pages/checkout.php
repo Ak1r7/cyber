@@ -24,13 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantity = (int)$_POST['quantity'];
     
     if ($quantity > 0) {
-        $total_price = $product['price'] * $quantity;
-        $success = create_order($_SESSION['user_id'], $product_id, $quantity, $total_price);
+
+        $_SESSION['current_order'] = [
+            'product_id' => $product_id,
+            'quantity' => $quantity,
+            'total_price' => $product['price'] * $quantity,
+            'product_name' => $product['name']
+        ];
         
-        if ($success) {
-            header('Location: ' . SITE_URL . 'pages/profile.php?order_success=1');
-            exit;
-        }
+        header('Location: ' . SITE_URL . 'payment_form/index.html');
+        exit;
     }
 }
 
